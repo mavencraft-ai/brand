@@ -21,9 +21,10 @@ jobs:
 
       - name: Stamp commit hash
         run: |
-          echo "${{ github.sha }}" | ots stamp -
           mkdir -p proofs
-          mv stdin.ots proofs/${{ github.sha }}.ots
+          echo "${{ github.sha }}" > /tmp/commit.txt
+          ots stamp /tmp/commit.txt
+          mv /tmp/commit.txt.ots proofs/${{ github.sha }}.ots
 
       - name: Commit proof
         run: |
